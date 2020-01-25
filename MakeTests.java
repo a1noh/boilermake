@@ -46,26 +46,24 @@ public class MakeTests {
             for (int i = 0; i < 6; i++) { // For the virus symptoms
                 boolean randBool = random.nextBoolean();
                 if (randBool) {
-                    hasVirus += 8;
+                    hasVirus += 5;
                 } else {
-                    hasVirus -= 1;
+                    hasVirus -= 4;
                 }
                 fileString = fileString.concat(String.valueOf(randBool) + ",");
             }
-            for (int i = 0; i < 24; i++) {
+            for (int i = 0; i < 25; i++) {
                 boolean randBool = random.nextBoolean();
                 if (randBool) {
-                    hasVirus -= 1;
+                    hasVirus -= 4;
                 } else {
                     hasVirus += 1;
                 }
                 fileString = fileString.concat(String.valueOf(randBool) + ",");
             }
-            boolean randBool = random.nextBoolean();
-            if (randBool) {
-                hasVirus -= 1;
-            } else {
-                hasVirus += 1;
+            boolean randBool = false;
+            if (hasVirus > 0) {
+                randBool = true;
             }
             fileString = fileString.concat(String.valueOf(randBool) + "\n");
         }
