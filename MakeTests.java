@@ -42,6 +42,7 @@ public class MakeTests {
         String fileString = "";
         int hasVirus = 0;
         for (int j = 0 ; j < 2000 ; j++) {
+            hasVirus = 0;
             Random random = new Random();
             for (int i = 0; i < 6; i++) { // For the virus symptoms
                 boolean randBool = random.nextBoolean();
@@ -55,7 +56,7 @@ public class MakeTests {
             for (int i = 0; i < 25; i++) {
                 boolean randBool = random.nextBoolean();
                 if (randBool) {
-                    hasVirus -= 4;
+                    hasVirus -= 1;
                 } else {
                     hasVirus += 1;
                 }
