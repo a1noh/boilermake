@@ -7,11 +7,21 @@ probsF = [None] * 32
 osT = 0
 osF = 0
 total = 0
+allModelPredictions = [None] * 3
 
 
 def main():
+    testCase = ["True", "True", "True", "True", "False", "True", "True", "True", "True", "True", "True", "True",
+                "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True",
+                "True", "True", "True", "True", "True", "True", "True", "True"]
 
-    testCase = ["True", "False", "True", "True", "True", "False", "True", "True", "True", "False", "True", "False", "True", "False", "False", "True", "True", "False", "False", "True", "True", "False", "True", "True", "False", "False", "True", "False", "True", "False", "True", "True"]
+    #Model 1 ---------------------------------------------------------------------------------------------------
+
+    global probsT
+    global probsF
+    global osT
+    global osF
+    global total
 
     dfTrain = 1
     try:
@@ -23,7 +33,62 @@ def main():
 
     buildProbabilities(dfTrain)
     finale = testNBC(testCase)
-    print(finale)
+    allModelPredictions[0] = finale
+
+
+    #MODEL 2 ---------------------------------------------------------------------------------------------------
+    probsT = [None] * 32
+    probsF = [None] * 32
+    osT = 0
+    osF = 0
+    total = 0
+
+    dfTrain = 1
+    try:
+        dfTrain = pd.read_csv("Test2.csv", header=None)
+    except Exception as e:
+        print("ERROR: CSV FILE NOT FOUND")
+        return
+
+
+    buildProbabilities(dfTrain)
+    finale = testNBC(testCase)
+    allModelPredictions[1] = finale
+
+    #MODEL 3 -----------------------------------------------------------------------------------------------------
+
+    probsT = [None] * 32
+    probsF = [None] * 32
+    osT = 0
+    osF = 0
+    total = 0
+
+    dfTrain = 1
+    try:
+        dfTrain = pd.read_csv("Test3.csv", header=None)
+    except Exception as e:
+        print("ERROR: CSV FILE NOT FOUND")
+        return
+
+
+    buildProbabilities(dfTrain)
+    finale = testNBC(testCase)
+    allModelPredictions[2] = finale
+
+    trues = 0
+    falses = 0
+    for i in range(0, 3):
+        if allModelPredictions[i] == "True":
+            trues += 1
+        else:
+            falses += 1
+
+    if trues > falses:
+        print("True")
+    else:
+        print("False")
+
+    print(allModelPredictions)
 
 
 def buildProbabilities(train):
