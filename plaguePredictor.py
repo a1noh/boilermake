@@ -3,7 +3,7 @@ from flask import Flask
 import sys
 import pandas as pd
 import numpy as np
-from flask import Flask
+from flask import Flask, current_app
 
 probsT = [None] * 32
 probsF = [None] * 32
@@ -98,7 +98,7 @@ def plaguePrediction():
 @app.route('/')
 def index():
     test = plaguePrediction()
-    return test
+    return current_app.send_static_file('homepage.html')
 
 
 def buildProbabilities(train):
