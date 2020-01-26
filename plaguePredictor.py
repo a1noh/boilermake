@@ -3,7 +3,7 @@ from flask import Flask
 import sys
 import pandas as pd
 import numpy as np
-from flask import Flask, current_app
+from flask import Flask
 
 probsT = [None] * 32
 probsF = [None] * 32
@@ -12,13 +12,17 @@ osF = 0
 total = 0
 allModelPredictions = [None] * 3
 
+testCase = ["True", "True", "False", "False", "False", "True", "True", "False", "False", "False", "False", "False",
+            "True", "True", "False", "True", "False", "True", "False", "True", "False", "True", "False", "True",
+            "True", "True", "True", "True", "True", "True", "True", "True"]
+
+testCase2 = ["True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True",
+            "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True",
+            "True", "True", "True", "True", "True", "True", "True", "True"]
+
 app = Flask(__name__)
 
 def plaguePrediction():
-
-    testCase = ["True", "True", "True", "True", "False", "True", "True", "True", "True", "True", "True", "True",
-                "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True",
-                "True", "True", "True", "True", "True", "True", "True", "True"]
 
     #Model 1 ---------------------------------------------------------------------------------------------------
 
@@ -98,7 +102,7 @@ def plaguePrediction():
 @app.route('/')
 def index():
     test = plaguePrediction()
-    return current_app.send_static_file('homepage.html')
+    return test
 
 
 def buildProbabilities(train):
@@ -195,6 +199,6 @@ def testNBC(dfTest):
     return predicted
 
 if __name__ == "__main__":
-    app.run(debug=True, port=9998)
+    app.run(debug=True, port=7593)
     #main()
 
