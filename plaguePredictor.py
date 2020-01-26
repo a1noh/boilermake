@@ -95,7 +95,6 @@ def plaguePrediction():
 
     print(allModelPredictions)
 
-
 @app.route('/')
 def index():
     test = plaguePrediction()
@@ -196,6 +195,6 @@ def testNBC(dfTest):
     return predicted
 
 if __name__ == "__main__":
-    app.run(debug=True, port=9999)
+    app.run(debug=True, port=9998)
     #main()
 
