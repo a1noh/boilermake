@@ -1,6 +1,9 @@
+#!flask/bin/python
+from flask import Flask
 import sys
 import pandas as pd
 import numpy as np
+from flask import Flask
 
 probsT = [None] * 32
 probsF = [None] * 32
@@ -9,8 +12,10 @@ osF = 0
 total = 0
 allModelPredictions = [None] * 3
 
+app = Flask(__name__)
 
-def main():
+def plaguePrediction():
+
     testCase = ["True", "True", "True", "True", "False", "True", "True", "True", "True", "True", "True", "True",
                 "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True", "True",
                 "True", "True", "True", "True", "True", "True", "True", "True"]
@@ -84,11 +89,17 @@ def main():
             falses += 1
 
     if trues > falses:
-        print("True")
+        return "True"
     else:
-        print("False")
+        return "False"
 
     print(allModelPredictions)
+
+
+@app.route('/')
+def index():
+    test = plaguePrediction()
+    return test
 
 
 def buildProbabilities(train):
@@ -185,5 +196,6 @@ def testNBC(dfTest):
     return predicted
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True, port=9999)
+    #main()
 
